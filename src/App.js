@@ -12,6 +12,7 @@ import Login from './components/Login/Login';
 import NoMatch from './components/NoMatch/NoMatch';
 import Header from './components/Header/Header';
 import Rent from './components/Rent/Rent';
+import Destination from './components/Destination/Destination';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path="/rent">
             <Rent></Rent>
+          </Route>
+          <Route path="/destination">
+            <Destination></Destination>
           </Route>
           <Route exact path="/">
               <Home></Home>
