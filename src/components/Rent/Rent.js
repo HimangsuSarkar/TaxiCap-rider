@@ -4,15 +4,15 @@ import { useHistory } from 'react-router';
 
 const Rent = (props) => {
     console.log(props.rent);
-    const { name, img } = props.rent;
+    const { name, img, id } = props.rent;
     const history = useHistory();
 
-    const handleRant = () => {
-        history.push('/destination');
+    const handleRant = (id) => {
+        history.push(`/destination/${id}`);
     }
     return (
         <div>
-            <Card style={{ width: '18rem' }} onClick={handleRant}>
+            <Card style={{ width: '18rem' }} onClick={() => handleRant(id)}>
                 <Card.Img variant="top" src={img} />
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>

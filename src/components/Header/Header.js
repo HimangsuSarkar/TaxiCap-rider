@@ -5,12 +5,13 @@ import Navbar from 'react-bootstrap/cjs/Navbar';
 import { Link, NavLink } from 'react-router-dom';
 import { UserContext } from '../../App';
 import './Header.css';
+import header from '../../images/Bg.png';
 const Header = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     return (
-        <div className='header'>
+        <div className='header' >
             {/* <img src={logo} alt="" /> */}
-            <nav>
+            < nav >
                 <Link to="/home">Home</Link>
                 <Link to="/destination">Destination</Link>
                 <Link to="/login" > LogIn</Link >
