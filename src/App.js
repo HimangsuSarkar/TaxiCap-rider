@@ -13,12 +13,20 @@ import NoMatch from './components/NoMatch/NoMatch';
 import Header from './components/Header/Header';
 import Rent from './components/Rent/Rent';
 import Destination from './components/Destination/Destination';
+import { createContext } from 'react';
+import { useState } from 'react';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+
+export const UserContext = createContext()
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({});
   return (
-    <div className="App">
-      <Header></Header>
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+      <h3>Email:{loggedInUser.email}</h3>
+
       <Router>
+        <Header></Header>
         <Switch>
           <Route path="/home">
             <Home></Home>
@@ -26,21 +34,21 @@ function App() {
           <Route path="/login">
             <Login></Login>
           </Route>
-          <Route path="/rent">
+          <PrivateRoute path="/rent">
             <Rent></Rent>
-          </Route>
-          <Route path="/destination">
+          </PrivateRoute>
+          <PrivateRoute path="/destination">
             <Destination></Destination>
-          </Route>
+          </PrivateRoute>
           <Route exact path="/">
-              <Home></Home>
-            </Route>
-            <Route path="*">
-              <NoMatch />
-            </Route>
+            <Home></Home>
+          </Route>
+          <Route path="*">
+            <NoMatch />
+          </Route>
         </Switch>
       </Router>
-    </div >
+    </UserContext.Provider >
   );
 }
 
