@@ -49,6 +49,7 @@ const Login = () => {
                     photo: photoURL,
                 };
                 setUser(signedInUser);
+                setLoggedInUser(signedInUser);
             })
             .catch(err => {
                 console.log(err);

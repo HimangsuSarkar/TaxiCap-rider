@@ -1,4 +1,6 @@
+import { Button } from 'bootstrap';
 import React, { useContext, useEffect, useState } from 'react';
+import { Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { useHistory, useParams } from 'react-router';
 import fakeData from '../../fakeData.json';
@@ -12,6 +14,11 @@ const Destination = () => {
     console.log(vehicle);
     const [data, setData] = useState({});
 
+    const { register, handleSubmit } = useForm();
+    const onSubmit = e => {
+        setData(vehicle);
+    }
+
     // const [formData, setFormData] = useState({ email: null, password: null });
 
 
@@ -20,45 +27,41 @@ const Destination = () => {
     //     setFormData({ ...formData, [key]: e.target.value })
     // }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(e.target.value);
-        setData(vehicle);
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     console.log(e.target.value);
+    //     setData(vehicle);
 
-    }
+    // }
     return (
 
         <div >
             <h1>{id}</h1>
-            < form onSubmit={handleSubmit} >
-                <label for="">Pick From:</label><br />
 
-                <select id="" name="">
+            <form onSubmit={handleSubmit(onSubmit)}>
+                PickFrom:
+                <select name="vehicle" ref={register}>
                     <option value="Dhaka">Dhaka</option>
                     <option value="Mymensingh">Mymensingh</option>
-                    <option value="meDinajpurrcedes">Dinajpur</option>
                     <option value="Kishoreganj">Kishoreganj</option>
-                </select><br />
-
-                <label for="">Pick to:</label><br />
-
-                <select id="" name="">
-                    <option value="Dhaka">Dhaka</option>
-                    <option value="Mymensingh">Mymensingh</option>
                     <option value="Dinajpur">Dinajpur</option>
+                </select><br />
+                PickTo:
+                <select name="vehicle" ref={register}>
+                    <option value="Dhaka">Dhaka</option>
+                    <option value="Mymensingh">Mymensingh</option>
                     <option value="Kishoreganj">Kishoreganj</option>
+                    <option value="Dinajpur">Dinajpur</option>
                 </select><br /><br />
-                <label for="start">From:</label>
-                <input type="date" name="" id="" /><br />
-                <label for="start">To:</label>
-                <input type="date" name="" id="" /><br /><br />
-                <input type="submit" value="clicked" />
-            </form >
-            <h5>
-                {
-                    data.name
-                }
-            </h5>
+                <input type="submit" />
+            </form>
+            {
+                <div>
+                    <h3>{data.name}</h3>
+                    <img src={data.img} alt="" />
+                </div>
+            }
+
         </div >
     );
 };
