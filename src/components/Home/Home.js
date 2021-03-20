@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
@@ -9,17 +9,17 @@ import fakeDate from '../../fakeData.json';
 import Rent from '../Rent/Rent';
 import './Home.css';
 import header from '../../images/Bg.png'
+
+export const vehicleContext = createContext()
 const Home = () => {
     const [vehicle, setVehicle] = useState(fakeDate);
-    console.log(vehicle);
 
     useEffect(() => {
         setVehicle(fakeDate);
-        // console.log(setVehicle(fakeDate));
     }, [])
     return (
-        <div style={{ backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${header})` }} >
-            <Container>
+        <vehicleContext.Provider value={[vehicle, setVehicle]}>
+            < Container >
                 <Row>
                     <Col xs={3} md={12} className="card-info">
                         {
@@ -27,8 +27,8 @@ const Home = () => {
                         }
                     </Col>
                 </Row>
-            </Container>
-        </div >
+            </Container >
+        </vehicleContext.Provider >
     );
 };
 

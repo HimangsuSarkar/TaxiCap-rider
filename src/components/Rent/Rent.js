@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/cjs/Card';
 import { useHistory } from 'react-router';
 
 const Rent = (props) => {
-    console.log(props.rent);
+    // console.log(props.rent);
     const { name, img, id } = props.rent;
     const history = useHistory();
 
