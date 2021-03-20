@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useState } from 'react';
-import { Button, Form, Jumbotron } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "firebase/auth";
@@ -99,6 +99,7 @@ const Login = () => {
         <div className="App">
 
             <h1>Our Authentication</h1>
+            <p>{loggedInUser.email}</p>
             <input type="checkbox" name="newUser" onChange={() => setNewUser(!newUser)} />
             <label htmlFor="newUser">New User Sign Up</label><br />
             <form onSubmit={handleSubmit}>
