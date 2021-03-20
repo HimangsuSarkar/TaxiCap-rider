@@ -97,21 +97,60 @@ const Login = () => {
 
     return (
         <div className="App">
-            <Jumbotron>
-                <h1>Our Authentication</h1>
-                <p>{loggedInUser.email}</p>
-                <Form.Check type="checkbox" name="newUser" onChange={() => setNewUser(!newUser)} />
-                <Form.Label htmlFor="newUser">New User Sign Up</Form.Label><br />
 
+            <h1>Our Authentication</h1>
+            <input type="checkbox" name="newUser" onChange={() => setNewUser(!newUser)} />
+            <label htmlFor="newUser">New User Sign Up</label><br />
+            <form onSubmit={handleSubmit}>
+
+                {newUser && <input type="text" name="name" onBlur={handleBlur} placeholder="Enter your Name" />}<br />
+
+                <input type="text" name="email" onBlur={handleBlur} placeholder='Enter your email' required /><br />
+                <input type="password" name="password" onBlur={handleBlur} placeholder="Enter your password" required /><br />
+                <input type="password" name="ConfirmPassword" onBlur={handleBlur} placeholder="Confirm your password" required /><br />
+                <input type="submit" value={newUser ? 'Sign Up' : 'Sign In'} />
+            </form>
+            <p style={{ color: 'red' }}> {user.error}</p>
+            {
+                user.success && <p style={{ color: 'green' }}> {newUser ? 'Created' : 'Logged In'} successfully!</p>
+            }
+
+            {
+                user.isSignIn ? < Button onClick={signOut}>Sign out</Button> :
+                    <Button onClick={googleSignIn} ><FontAwesomeIcon icon={faGoogle} />  Sign In Google</Button>
+            }
+            {
+                user.isSignIn ? < Button onClick={signOut}>Sign out</Button> :
+                    <Button onClick={gitHubSignIn} ><FontAwesomeIcon icon={faGithub} /> Sign in By Github</Button>
+            }
+
+            {/* <Jumbotron>
+                <input type="checkbox" name="newUser" onChange={() => setNewUser(!newUser)} />
+                <label htmlFor="newUser">New User Sign Up</label><br />
                 <Form onSubmit={handleSubmit}>
 
-                    {newUser && <Form.Control type="text" name="name" onBlur={handleBlur} placeholder="Enter your Name" />}<br />
+                    {newUser &&
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control type="text" onBlur={handleBlur} placeholder="Enter name" />
+                        </Form.Group>
+                    }
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control type="email" onBlur={handleBlur} placeholder="Enter email" />
+                    </Form.Group>
 
-                    <Form.Control type='email' onBlur={handleBlur} placeholder=' Enter your email' required /><br />
-                    <Form.Control type="password" name="password" onBlur={handleBlur} placeholder="Enter your password" required /><br />
-                    <Form.Control type="password" name="newPassword" onBlur={handleBlur} placeholder="Enter confirm password" required /><br />
-
-                    <Form.Control type="submit" value={newUser ? 'Sign Up' : 'Sign In'} />
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" onBlur={handleBlur} placeholder="Password" />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" onBlur={handleBlur} placeholder="Confirm Password" />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                        {newUser ? 'Sign Up' : 'Sign In'}
+                    </Button>
                 </Form>
                 <p style={{ color: 'red' }}> {user.error}</p>
                 {
@@ -126,8 +165,7 @@ const Login = () => {
                     user.isSignIn ? < Button onClick={signOut}>Sign out</Button> :
                         <Button onClick={gitHubSignIn} ><FontAwesomeIcon icon={faGithub} /> Sign in By Github</Button>
                 }
-            </Jumbotron>
-
+            </Jumbotron> */}
 
 
 
