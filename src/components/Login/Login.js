@@ -111,7 +111,7 @@ const Login = () => {
 
                 <input type="submit" value={newUser ? 'Sign Up' : 'Sign In'} />
             </Form>
-            <p style={{ color: 'red' }}> {user.error}</p>
+            <p style={{ color: 'red' }}> {user.err}</p>
             {
                 user.success && <p style={{ color: 'green' }}> {newUser ? 'Created' : 'Logged In'} successfully!</p>
             }
