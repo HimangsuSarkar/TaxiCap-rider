@@ -1,7 +1,7 @@
 import { Button } from 'bootstrap';
 import React from 'react';
 import { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,6 +11,7 @@ import firebaseConfig from './firebase.config'
 import { useContext } from 'react';
 import { UserContext } from '../../App';
 import { useHistory, useLocation } from 'react-router';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBInput, MDBRow } from 'mdbreact';
 
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -193,7 +194,70 @@ const Login = () => {
                 user.isSignIn ? < button onClick={handleSignOut}>Sign out</button> :
                     <button onClick={handleGithubSignIn}>Sign in By Github</button>
             }
+
+
+            <MDBContainer>
+                <MDBRow>
+                    <MDBCol md="6">
+                        <MDBCard>
+                            <MDBCardBody>
+                                <form onSubmit={handleSubmit}>
+                                    <input type="checkbox" name="newUser" onChange={() => setNewUser(!newUser)} />
+                                    <label htmlFor="newUser" className="h4 text-center py-4">New User Sign Up</label><br />
+                                    <div className="grey-text">
+                                        {newUser &&
+                                            <MDBInput onBlur={handleBlur}
+                                                label="Your name"
+                                                icon="user"
+                                                group
+                                                type="text"
+                                                validate
+                                                error="wrong"
+                                                success="right"
+                                            />}
+                                        <MDBInput onBlur={handleBlur}
+                                            label="Your email"
+                                            icon="envelope"
+                                            group
+                                            type="email"
+                                            validate
+                                            error="wrong"
+                                            success="right"
+                                        />
+
+                                        <MDBInput onBlur={handleBlur}
+                                            label="Your password"
+                                            icon="lock"
+                                            group
+                                            type="password"
+                                            validate
+                                        />
+                                        <MDBInput onBlur={handleBlur}
+                                            label="Confirm  Your password"
+                                            icon="lock"
+                                            group
+                                            type="password"
+                                            validate
+                                        />
+                                    </div>
+                                    <div className="text-center py-4 mt-3">
+                                        {/* <input type="submit" value={newUser ? 'Sign Up' : 'Sign In'} /> */}
+                                        <MDBBtn color="cyan" type="submit" value={newUser ? 'Sign Up' : 'Sign In'}>
+                                        </MDBBtn>
+                                    </div>
+                                </form>
+                                <p style={{ color: 'red' }}> {user.error}</p>
+                                {
+                                    user.success && <p style={{ color: 'green' }}> {newUser ? 'Created' : 'Logged In'} successfully!</p>
+                                }
+                            </MDBCardBody>
+                        </MDBCard>
+                    </MDBCol>
+                </MDBRow>
+            </MDBContainer>
         </div >
+
+
     );
 }
 export default Login;

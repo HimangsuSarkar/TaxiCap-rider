@@ -1,11 +1,10 @@
-import { Button } from 'bootstrap';
+
 import React, { useContext, useEffect, useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Card, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { useHistory, useParams } from 'react-router';
 import fakeData from '../../fakeData.json';
-import Booking from '../Booking/Booking';
-import { vehicleContext } from '../Home/Home';
+
 const Destination = () => {
     const { id } = useParams();
     const history = useHistory();
@@ -18,7 +17,7 @@ const Destination = () => {
     const onSubmit = e => {
         setData(vehicle);
     }
-
+    const { name, img, rent } = data;
     // const [formData, setFormData] = useState({ email: null, password: null });
 
 
@@ -56,10 +55,13 @@ const Destination = () => {
                 <input type="submit" />
             </form>
             {
-                <div>
-                    <h3>{data.name}</h3>
-                    <img src={data.img} alt="" />
-                </div>
+                <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src={img} />
+                    <Card.Body>
+                        <Card.Title>{name}</Card.Title>
+                        <Card.Title>{rent}</Card.Title>
+                    </Card.Body>
+                </Card>
             }
 
         </div >

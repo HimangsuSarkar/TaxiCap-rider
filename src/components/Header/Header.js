@@ -5,9 +5,8 @@ import Navbar from 'react-bootstrap/cjs/Navbar';
 import { Link, NavLink } from 'react-router-dom';
 import { UserContext } from '../../App';
 import './Header.css';
-import header from '../../images/Bg.png';
-import Home from '../Home/Home';
-import { Button, Form, FormControl } from 'react-bootstrap';
+
+
 const Header = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     return (
