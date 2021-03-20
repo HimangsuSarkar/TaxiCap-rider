@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { useParams } from 'react-router';
 import fakeData from '../../fakeData.json';
-import Maps from '../Maps/Maps';
+
 
 
 const Destination = () => {

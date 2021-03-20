@@ -8,9 +8,9 @@ import "firebase/auth";
 import { useContext } from 'react';
 import { UserContext } from '../../App';
 import { useHistory, useLocation } from 'react-router';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBInput, MDBRow } from 'mdbreact';
 import { createUserWithEmailAndPassword, handleGithubSignIn, handleGoogleSignIn, handleSignOut, initializeLOgInFramework, signInWithEmailAndPassword } from './LogInManage';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 
 const Login = () => {
@@ -120,11 +120,11 @@ const Login = () => {
 
                 {
                     user.isSignIn ? < Button onClick={signOut}>Sign out</Button> :
-                        <Button onClick={googleSignIn} > Sign In Google</Button>
+                        <Button onClick={googleSignIn} ><FontAwesomeIcon icon={faGoogle} />  Sign In Google</Button>
                 }
                 {
                     user.isSignIn ? < Button onClick={signOut}>Sign out</Button> :
-                        <Button onClick={gitHubSignIn} > Sign in By Github</Button>
+                        <Button onClick={gitHubSignIn} ><FontAwesomeIcon icon={faGithub} /> Sign in By Github</Button>
                 }
             </Jumbotron>
 
