@@ -4,11 +4,11 @@ import { Card } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { useParams } from 'react-router';
 import fakeData from '../../fakeData.json';
-import Maps from '../Maps/Maps';
+
 
 const Destination = () => {
     const { id } = useParams();
-    const vehicle = fakeData.find(ve => ve.id == id);
+    const vehicle = fakeData.find(ve => ve.id === id);
     console.log(fakeData);
     const [data, setData] = useState({});
 
