@@ -1,13 +1,12 @@
 
 import React, { useState } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { useHistory, useParams } from 'react-router';
 import fakeData from '../../fakeData.json';
 
 const Destination = () => {
     const { id } = useParams();
-    const history = useHistory();
     const vehicle = fakeData.find(ve => ve.id == id);
     console.log(fakeData);
     console.log(vehicle);

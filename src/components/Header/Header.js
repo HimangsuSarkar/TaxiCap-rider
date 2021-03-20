@@ -2,13 +2,13 @@ import React from 'react';
 import { useContext } from 'react';
 import Nav from 'react-bootstrap/cjs/Nav';
 import Navbar from 'react-bootstrap/cjs/Navbar';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../../App';
 import './Header.css';
 
 
 const Header = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [loggedInUser] = useContext(UserContext);
     return (
         <div className="header">
             <Navbar bg="dark" expand="lg" variant="dark">

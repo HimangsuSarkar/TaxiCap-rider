@@ -1,8 +1,7 @@
-import { Button } from 'bootstrap';
+
 import React from 'react';
 import { useState } from 'react';
-import { Col, Form } from 'react-bootstrap';
-import { useForm } from "react-hook-form";
+import { Form } from 'react-bootstrap';
 import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import firebase from "firebase/app";
@@ -31,7 +30,7 @@ const Login = () => {
         success: false
     })
 
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [setLoggedInUser] = useContext(UserContext);
     const history = useHistory();
     const location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
