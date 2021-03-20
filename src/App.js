@@ -27,6 +27,9 @@ function App() {
       <Router>
         <Header></Header>
         <Switch>
+          <Route exact path="/">
+            <Home></Home>
+          </Route>
           <Route path="/home">
             <Home></Home>
           </Route>
@@ -39,9 +42,6 @@ function App() {
           <PrivateRoute path="/destination/:id">
             <Destination></Destination>
           </PrivateRoute>
-          <Route exact path="/">
-            <Home></Home>
-          </Route>
           <Route path="*">
             <NoMatch />
           </Route>

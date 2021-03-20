@@ -24,7 +24,7 @@ const Login = () => {
         success: false
     })
     initializeLOgInFramework();
-    const [setLoggedInUser] = useContext(UserContext);
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const history = useHistory();
     const location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
@@ -99,6 +99,7 @@ const Login = () => {
         <div className="App">
 
             <h1>Our Authentication</h1>
+            <p>{loggedInUser.email}</p>
             <input type="checkbox" name="newUser" onChange={() => setNewUser(!newUser)} />
             <label htmlFor="newUser">New User Sign Up</label><br />
             <Form onSubmit={handleSubmit}>
