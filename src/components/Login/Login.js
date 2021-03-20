@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Button, Form, Jumbotron } from 'react-bootstrap';
 import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "firebase/auth";
@@ -97,42 +97,46 @@ const Login = () => {
 
     return (
         <div className="App">
+            <Jumbotron>
+                <h1>Our Authentication</h1>
+                <p>{loggedInUser.email}</p>
+                <Form.Check type="checkbox" name="newUser" onChange={() => setNewUser(!newUser)} />
+                <Form.Label htmlFor="newUser">New User Sign Up</Form.Label><br />
 
-            <h1>Our Authentication</h1>
-            <p>{loggedInUser.email}</p>
-            <input type="checkbox" name="newUser" onChange={() => setNewUser(!newUser)} />
-            <label htmlFor="newUser">New User Sign Up</label><br />
-            <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit}>
 
-                {newUser && <input type="text" name="name" onBlur={handleBlur} placeholder="Enter your Name" />}<br />
+                    {newUser && <Form.Control type="text" name="name" onBlur={handleBlur} placeholder="Enter your Name" />}<br />
 
-                <input type="text" name="email" onBlur={handleBlur} placeholder='Enter your email' required /><br />
-                <input type="password" name="password" onBlur={handleBlur} placeholder="Enter your password" required /><br />
-                <input type="password" name="newPassword" onBlur={handleBlur} placeholder="Enter confirm password" required /><br />
+                    <Form.Control type='email' onBlur={handleBlur} placeholder=' Enter your email' required /><br />
+                    <Form.Control type="password" name="password" onBlur={handleBlur} placeholder="Enter your password" required /><br />
+                    <Form.Control type="password" name="newPassword" onBlur={handleBlur} placeholder="Enter confirm password" required /><br />
 
-                <input type="submit" value={newUser ? 'Sign Up' : 'Sign In'} />
-            </Form>
-            <p style={{ color: 'red' }}> {user.err}</p>
-            {
-                user.success && <p style={{ color: 'green' }}> {newUser ? 'Created' : 'Logged In'} successfully!</p>
-            }
+                    <Form.Control type="submit" value={newUser ? 'Sign Up' : 'Sign In'} />
+                </Form>
+                <p style={{ color: 'red' }}> {user.error}</p>
+                {
+                    user.success && <p style={{ color: 'green' }}> {newUser ? 'Created' : 'Logged In'} successfully!</p>
+                }
 
-            {
-                user.isSignIn ? < button onClick={signOut}>Sign out</button> :
-                    <button onClick={googleSignIn}>Sign In Google</button>
-            }
-            {
-                user.isSignIn ? < button onClick={signOut}>Sign out</button> :
-                    <button onClick={gitHubSignIn}>Sign in By Github</button>
-            }
+                {
+                    user.isSignIn ? < Button onClick={signOut}>Sign out</Button> :
+                        <Button onClick={googleSignIn} > Sign In Google</Button>
+                }
+                {
+                    user.isSignIn ? < Button onClick={signOut}>Sign out</Button> :
+                        <Button onClick={gitHubSignIn} > Sign in By Github</Button>
+                }
+            </Jumbotron>
 
 
-            <MDBContainer>
-                <MDBRow>
+
+
+            {/* <MDBContainer>
+                < MDBRow >
                     <MDBCol md="6">
                         <MDBCard>
                             <MDBCardBody>
-                                <form onSubmit={handleSubmit}>
+                                <Form onSubmit={handleSubmit}>
                                     <input type="checkbox" name="newUser" onChange={() => setNewUser(!newUser)} />
                                     <label htmlFor="newUser" className="h4 text-center py-4">New User Sign Up</label><br />
                                     <div className="grey-text">
@@ -172,11 +176,11 @@ const Login = () => {
                                         />
                                     </div>
                                     <div className="text-center py-4 mt-3">
-                                        {/* <input type="submit" value={newUser ? 'Sign Up' : 'Sign In'} /> */}
                                         <MDBBtn color="cyan" type="submit" value={newUser ? 'Sign Up' : 'Sign In'}>
+                                            {newUser ? 'Sign Up' : 'Sign In'}
                                         </MDBBtn>
                                     </div>
-                                </form>
+                                </Form>
                                 <p style={{ color: 'red' }}> {user.error}</p>
                                 {
                                     user.success && <p style={{ color: 'green' }}> {newUser ? 'Created' : 'Logged In'} successfully!</p>
@@ -185,9 +189,9 @@ const Login = () => {
                         </MDBCard>
                     </MDBCol>
                 </MDBRow>
-            </MDBContainer>
+            </MDBContainer >
+         */}
         </div >
-
 
     );
 }

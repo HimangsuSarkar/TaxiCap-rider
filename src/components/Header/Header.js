@@ -22,6 +22,7 @@ const Header = () => {
                     </Nav>
                     <Nav>
                         <Nav.Link href="#deets">{loggedInUser.email}</Nav.Link>
+                        <Nav.Link href="#deets">{loggedInUser.name}</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

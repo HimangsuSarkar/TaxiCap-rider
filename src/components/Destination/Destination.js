@@ -4,6 +4,7 @@ import { Card } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { useParams } from 'react-router';
 import fakeData from '../../fakeData.json';
+import Maps from '../Maps/Maps';
 
 
 const Destination = () => {
@@ -18,25 +19,10 @@ const Destination = () => {
         console.log(data);
     }
     const { name, img, rent } = data;
-    // const [formData, setFormData] = useState({ email: null, password: null });
 
-
-    // const onChangeHandler = (e) => {
-    //     const key = e.target.name
-    //     setFormData({ ...formData, [key]: e.target.value })
-    // }
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log(e.target.value);
-    //     setData(vehicle);
-
-    // }
     return (
 
         <div >
-            <h1>{id}</h1>
-
             <form onSubmit={handleSubmit(onSubmit)}>
                 PickFrom:
                 <select name="vehicle" defaultValue={vehicle} ref={register}>
@@ -55,18 +41,37 @@ const Destination = () => {
                 <input type="submit" />
 
             </form>
-            {
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={img} />
-                    <Card.Body>
-                        <Card.Title>{name}</Card.Title>
-                        <Card.Title>{rent}</Card.Title>
-                    </Card.Body>
-                </Card>
-            }
-            {/* <div>
-                <Maps></Maps>
-            </div> */}
+            <div>
+                {
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src={img} />
+                        <Card.Body>
+                            <Card.Title>{name}</Card.Title>
+                            <Card.Title>{rent}</Card.Title>
+                        </Card.Body>
+                    </Card>
+                }
+
+                {
+                    < Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src={img} />
+                        <Card.Body>
+                            <Card.Title>{name}</Card.Title>
+                            <Card.Title>{rent} or $7.6</Card.Title>
+                        </Card.Body>
+                    </Card>
+                }
+                {
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src={img} />
+                        <Card.Body>
+                            <Card.Title>{name}</Card.Title>
+                            <Card.Title>{rent} or $5.88</Card.Title>
+                        </Card.Body>
+                    </Card>
+                }
+
+            </div>
 
         </div >
     );

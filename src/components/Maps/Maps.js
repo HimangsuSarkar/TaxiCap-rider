@@ -1,22 +1,22 @@
 import React from 'react';
-
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-
 const Maps = () => {
+
     return (
-        <div>
-            <Map google={this.props.google} zoom={14}>
 
-                <Marker onClick={this.onMarkerClick}
-                    name={'Current location'} />
+        <Map google={this.props.google} zoom={14}>
 
-                <InfoWindow onClose={this.onInfoWindowClose}>
+            <Marker onClick={this.onMarkerClick}
+                name={'Current location'} />
 
-                </InfoWindow>
-            </Map>
-        </div>
+            <InfoWindow onClose={this.onInfoWindowClose}>
+
+            </InfoWindow>
+        </Map>
+
     );
 };
+
 
 export default GoogleApiWrapper({
     apiKey: ("AIzaSyBnQy6n1jwaUQ5PV - P2iOiScVbtaTb - LX8")
