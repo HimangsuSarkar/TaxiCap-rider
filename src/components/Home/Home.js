@@ -19,7 +19,7 @@ const Home = () => {
         <div className="home">
             < Container >
                 <Row>
-                    <Col xs={12} md={3} className="card-info">
+                    <Col className="card-info">
                         {
                             vehicle.map(rent => <Rent rent={rent} key={rent.id}></Rent>)
                         }

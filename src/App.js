@@ -15,6 +15,7 @@ import Destination from './components/Destination/Destination';
 import { createContext } from 'react';
 import { useState } from 'react';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Maps from './components/Maps/Maps';
 
 
 export const UserContext = createContext()

@@ -4,17 +4,18 @@ import { Card } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { useParams } from 'react-router';
 import fakeData from '../../fakeData.json';
+import Maps from '../Maps/Maps';
 
 const Destination = () => {
     const { id } = useParams();
-    const vehicle = fakeData.find(ve => ve.id === id);
+    const vehicle = fakeData.find(ve => ve.id == id);
     console.log(fakeData);
-    console.log(vehicle);
     const [data, setData] = useState({});
 
     const { register, handleSubmit } = useForm();
-    const onSubmit = e => {
+    const onSubmit = data => {
         setData(vehicle);
+        console.log(data);
     }
     const { name, img, rent } = data;
     // const [formData, setFormData] = useState({ email: null, password: null });
@@ -38,20 +39,21 @@ const Destination = () => {
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 PickFrom:
-                <select name="vehicle" ref={register}>
+                <select name="vehicle" defaultValue={vehicle} ref={register}>
                     <option value="Dhaka">Dhaka</option>
                     <option value="Mymensingh">Mymensingh</option>
                     <option value="Kishoreganj">Kishoreganj</option>
                     <option value="Dinajpur">Dinajpur</option>
                 </select><br />
                 PickTo:
-                <select name="vehicle" ref={register}>
-                    <option value="Dhaka">Dhaka</option>
+                <select name="vehicle" defaultValue={vehicle} ref={register}>
                     <option value="Mymensingh">Mymensingh</option>
+                    <option value="Dhaka">Dhaka</option>
                     <option value="Kishoreganj">Kishoreganj</option>
                     <option value="Dinajpur">Dinajpur</option>
                 </select><br /><br />
                 <input type="submit" />
+
             </form>
             {
                 <Card style={{ width: '18rem' }}>
@@ -62,6 +64,9 @@ const Destination = () => {
                     </Card.Body>
                 </Card>
             }
+            {/* <div>
+                <Maps></Maps>
+            </div> */}
 
         </div >
     );

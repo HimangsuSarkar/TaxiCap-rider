@@ -12,7 +12,7 @@ const Rent = (props) => {
     }
     return (
         <div>
-            <Card style={{ width: '18rem' }} onClick={() => handleRant(id)}>
+            <Card xs={12} md={3} style={{ width: '18rem' }} onClick={() => handleRant(id)}>
                 <Card.Img variant="top" src={img} />
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>

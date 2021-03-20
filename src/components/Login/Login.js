@@ -4,19 +4,13 @@ import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import firebase from "firebase/app";
 import "firebase/auth";
-import firebaseConfig from './firebase.config'
 import { useContext } from 'react';
 import { UserContext } from '../../App';
 import { useHistory, useLocation } from 'react-router';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBInput, MDBRow } from 'mdbreact';
+import { createUserWithEmailAndPassword, handleGithubSignIn, handleGoogleSignIn, handleSignOut, initializeLOgInFramework, signInWithEmailAndPassword } from './LogInManage';
 
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-} else {
-    firebase.app(); // if already initialized, use that one
-}
 
 
 const Login = () => {
@@ -29,51 +23,59 @@ const Login = () => {
         error: '',
         success: false
     })
-
-    const [setLoggedInUser] = useContext(UserContext);
+    initializeLOgInFramework();
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const history = useHistory();
     const location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
 
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    const handleSignIn = () => {
-        firebase.auth().signInWithPopup(provider)
+    const googleSignIn = () => {
+        handleGoogleSignIn()
             .then(res => {
-                const { displayName, photoURL, email } = res.user;
-                const signedInUser = {
-                    isSignIn: true,
-                    name: displayName,
-                    email: email,
-                    password: '',
-                    photo: photoURL,
-                };
-                setUser(signedInUser);
-                setLoggedInUser(signedInUser);
-            })
-            .catch(err => {
-                console.log(err);
-                console.log(err.message);
+                handleResponse(res, true);
             })
     }
 
-    const handleSignOut = () => {
-        firebase.auth().signOut()
+    const gitHubSignIn = () => {
+        handleGithubSignIn()
             .then(res => {
-                const signedOutUser = {
-                    isSignIn: false,
-                    name: '',
-                    email: '',
-                    photo: '',
-                    error: '',
-                    success: false
-                };
-                setUser(signedOutUser);
+                handleResponse(res, true);
             })
-            .catch(err => {
-                console.log(err);
-                console.log(err.message);
+    }
+    const signOut = () => {
+        handleSignOut()
+            .then(res => {
+                handleResponse(res, false);
             })
+    }
+
+    const handleSubmit = (e) => {
+
+        if (newUser && user.email && user.password) {
+            createUserWithEmailAndPassword(user.name, user.email, user.password)
+                .then(res => {
+                    handleResponse(res, true);
+                })
+
+        }
+
+        if (!newUser && user.email && user.password) {
+            signInWithEmailAndPassword(user.email, user.password)
+                .then(res => {
+                    handleResponse(res, true);
+                })
+
+        }
+
+        e.preventDefault();
+    }
+
+    const handleResponse = (res, redirect) => {
+        setUser(res);
+        setLoggedInUser(res);
+        if (redirect) {
+            history.replace(from);
+        }
     }
     const handleBlur = (e) => {
         let isFieldValid = true;
@@ -92,78 +94,7 @@ const Login = () => {
         }
 
     }
-    const handleSubmit = (e) => {
 
-        if (newUser && user.email && user.password) {
-            firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-                .then(res => {
-                    const newUserInfo = { ...user };
-                    newUserInfo.error = '';
-                    newUserInfo.success = true;
-                    setUser(newUserInfo);
-                })
-                .catch(error => {
-                    const newUserInfo = { ...user };
-                    newUserInfo.error = error.message;
-                    newUserInfo.success = false;
-                    setUser(newUserInfo);
-                    updateUserName(user.name);
-                });
-        }
-        if (!newUser && user.email && user.password) {
-            firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-                .then((res) => {
-                    const newUserInfo = { ...user };
-                    newUserInfo.error = '';
-                    newUserInfo.success = true;
-                    setUser(newUserInfo);
-                    setLoggedInUser(newUserInfo);
-                    history.replace(from);
-                    console.log('sign in user info', res.user);
-                })
-                .catch((error) => {
-                    const newUserInfo = { ...user };
-                    newUserInfo.error = error.message;
-                    newUserInfo.success = false;
-                    setUser(newUserInfo);
-                });
-        }
-
-        e.preventDefault();
-    }
-
-    const updateUserName = name => {
-        const user = firebase.auth().currentUser;
-
-        user.updateProfile({
-            displayName: name,
-        }).then(function () {
-            console.log('user name updated successfully')
-        }).catch(function (error) {
-            console.log(error)
-        });
-    }
-
-
-    const handleGithubSignIn = () => {
-        var ghProvider = new firebase.auth.GithubAuthProvider();
-        firebase
-            .auth()
-            .signInWithPopup(ghProvider)
-            .then((res) => {
-                const newUserInfo = { ...user };
-                newUserInfo.error = '';
-                newUserInfo.success = true;
-                setUser(newUserInfo);
-                console.log('sign in user info', res.user);
-            })
-            .catch((error) => {
-                const newUserInfo = { ...user };
-                newUserInfo.error = error.message;
-                newUserInfo.success = false;
-                setUser(newUserInfo);
-            });
-    }
     return (
         <div className="App">
 
@@ -186,12 +117,12 @@ const Login = () => {
             }
 
             {
-                user.isSignIn ? < button onClick={handleSignOut}>Sign out</button> :
-                    <button onClick={handleSignIn}>Sign In Google</button>
+                user.isSignIn ? < button onClick={signOut}>Sign out</button> :
+                    <button onClick={googleSignIn}>Sign In Google</button>
             }
             {
-                user.isSignIn ? < button onClick={handleSignOut}>Sign out</button> :
-                    <button onClick={handleGithubSignIn}>Sign in By Github</button>
+                user.isSignIn ? < button onClick={signOut}>Sign out</button> :
+                    <button onClick={gitHubSignIn}>Sign in By Github</button>
             }
 
 
