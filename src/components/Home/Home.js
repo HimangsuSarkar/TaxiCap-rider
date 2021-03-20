@@ -10,7 +10,6 @@ import Rent from '../Rent/Rent';
 import './Home.css';
 import header from '../../images/Bg.png'
 
-export const vehicleContext = createContext()
 const Home = () => {
     const [vehicle, setVehicle] = useState(fakeDate);
 
@@ -18,17 +17,17 @@ const Home = () => {
         setVehicle(fakeDate);
     }, [])
     return (
-        <vehicleContext.Provider value={[vehicle, setVehicle]}>
+        <div className="home">
             < Container >
                 <Row>
-                    <Col xs={3} md={12} className="card-info">
+                    <Col xs={12} md={3} className="card-info">
                         {
                             vehicle.map(rent => <Rent rent={rent} key={rent.id}></Rent>)
                         }
                     </Col>
                 </Row>
             </Container >
-        </vehicleContext.Provider >
+        </div >
     );
 };
 

@@ -6,17 +6,26 @@ import { Link, NavLink } from 'react-router-dom';
 import { UserContext } from '../../App';
 import './Header.css';
 import header from '../../images/Bg.png';
+import Home from '../Home/Home';
+import { Button, Form, FormControl } from 'react-bootstrap';
 const Header = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     return (
-        <div className='header' >
-            {/* <img src={logo} alt="" /> */}
-            < nav >
-                <Link to="/home">Home</Link>
-                <Link to="/destination">Destination</Link>
-                <Link to="/login" > LogIn</Link >
-                <button onClick={() => setLoggedInUser({})}>Sign Out</button>
-            </nav >
+        <div className="header">
+            <Navbar bg="dark" expand="lg" variant="dark">
+                <Navbar.Brand to="/home">TaxiCap-rider</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Link to="/home">Home</Link>
+                        <Link to="/destination">Destination</Link>
+                        <Link to="/login" > LogIn</Link >
+                    </Nav>
+                    <Nav>
+                        <Nav.Link href="#deets">{loggedInUser.email}</Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
         </div >
     )
 };

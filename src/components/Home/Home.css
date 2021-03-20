@@ -3,3 +3,10 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }  
+.home{
+    background-image: url('../../images/Bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 600px;
+}

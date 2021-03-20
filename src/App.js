@@ -5,7 +5,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
@@ -16,7 +15,7 @@ import Destination from './components/Destination/Destination';
 import { createContext } from 'react';
 import { useState } from 'react';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import Booking from './components/Booking/Booking';
+
 
 export const UserContext = createContext()
 
@@ -34,9 +33,6 @@ function App() {
           </Route>
           <Route path="/login">
             <Login></Login>
-          </Route>
-          <Route path="/book">
-            <Booking></Booking>
           </Route>
           <PrivateRoute path="/rent">
             <Rent></Rent>

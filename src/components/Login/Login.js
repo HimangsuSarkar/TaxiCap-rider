@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import './Login.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config'
@@ -170,7 +170,7 @@ const Login = () => {
             <h1>Our Authentication</h1>
             <input type="checkbox" name="newUser" onChange={() => setNewUser(!newUser)} />
             <label htmlFor="newUser">New User Sign Up</label><br />
-            <form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
 
                 {newUser && <input type="text" name="name" onBlur={handleBlur} placeholder="Enter your Name" />}<br />
 
@@ -179,7 +179,7 @@ const Login = () => {
                 <input type="password" name="newPassword" onBlur={handleBlur} placeholder="Enter confirm password" required /><br />
 
                 <input type="submit" value={newUser ? 'Sign Up' : 'Sign In'} />
-            </form>
+            </Form>
             <p style={{ color: 'red' }}> {user.error}</p>
             {
                 user.success && <p style={{ color: 'green' }}> {newUser ? 'Created' : 'Logged In'} successfully!</p>
@@ -193,9 +193,6 @@ const Login = () => {
                 user.isSignIn ? < button onClick={handleSignOut}>Sign out</button> :
                     <button onClick={handleGithubSignIn}>Sign in By Github</button>
             }
-
-
-
         </div >
     );
 }
